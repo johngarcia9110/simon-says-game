@@ -153,6 +153,21 @@ input:focus + .slider {
   animation: shake-it-off 500ms forwards;
 }
 
+#alerts{
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 10px;
+  background: #FF8552;
+  font-family: sans-serif;
+  font-weight: bold;
+  color: #e6e6e6;
+}
+
+.disabled{
+  pointer-events: none;
+}
+
 @keyframes shake-it-off {
   0% {
     transform: translateX(0px);

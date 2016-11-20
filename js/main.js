@@ -1,3 +1,5 @@
+//TODO: add dissable buttons while it is computer's turn to prevent error
+
 var buttons = {
   green : document.getElementById('green'),
   red : document.getElementById('red'),
@@ -7,7 +9,8 @@ var buttons = {
   strict : document.getElementById('strict'),
   power : document.getElementById('switch'),
   count : document.getElementById('count'),
-  audio : document.getElementById('audio')
+  audio : document.getElementById('audio'),
+  alerts : document.getElementById('alerts')
 };
 
 var game = {
@@ -24,14 +27,20 @@ var game = {
   logic : {
     startRound : function(){
       if(game.status.power === true){
+        if(game.status.round === 20 && game.status.turn === 0){
+          buttons.alerts.innerHTML = "You Have Beat The Game!";
+          return false;
+        }
+        buttons.alerts.innerHTML = "";
         this.addStep();
         game.status.soundPlayer = setInterval(this.playSequence, 1000);
         buttons.start.disabled = true;
       }else{
-        console.log('You must turn the game on before you can play');
+        buttons.alerts.innerHTML = " You must turn the game on to play =D ";
       }
     },
     playSequence : function(){
+      handlers.disableBoard();
       if(game.status.soundNum < game.status.computerSequence.length){
         handlers.playSound(game.status.computerSequence[game.status.soundNum] + 'Sound');
         handlers.pressButton(game.status.computerSequence[game.status.soundNum]);
@@ -40,6 +49,7 @@ var game = {
         clearInterval(game.status.soundPlayer);
         game.status.soundPlayer = '';
         game.status.soundNum = 0;
+        handlers.enableBoard();
       }
     },
     addStep : function(pressedColor){
@@ -48,10 +58,6 @@ var game = {
       }
       if(game.status.turn === 0){
         //get step to computerSequence
-        if(game.status.round === 20){
-          console.log('You Have Beat The Game!');
-          break;
-        }
         game.status.round++;
         handlers.displayRound();
         var stepList = ['green', 'red', 'yellow', 'blue'];
@@ -69,7 +75,6 @@ var game = {
           if(game.status.humanSequence.length === game.status.computerSequence.length){
             if(this.checkSequencesForMatch()){
               //both sequences match
-              console.log('match detected, procceeding to next round!');
               game.status.humanSequence = [];
               game.status.turn = 0;
               game.logic.startRound();
@@ -96,7 +101,6 @@ var game = {
         if(game.status.humanSequence[i] === game.status.computerSequence[i] && i === game.status.computerSequence.length -1){
           return true;
         }else if(game.status.humanSequence[i] === game.status.computerSequence[i]){
-          console.log('Human Sequance index: ' + i + ' is equal to computer Sequence: ' + i);
         }else{
           return false;
         }
@@ -110,13 +114,12 @@ var game = {
 
         }else{
           return false;
-          console.log('validated to false');
         }
       }
       return true;
-      console.log('validated to true');
     },
     replaySequence : function(){
+      handlers.disableBoard();
       game.status.soundPlayer = setInterval(this.playSequence, 1000);
     },
     restartRound : function(){
@@ -132,7 +135,7 @@ var game = {
 
     },
     restartGame : function(){
-      console.log('you lost in strict mode the game will now reset from the start.');
+      buttons.alerts.innerHTML = 'you lost in strict mode the game will now reset from the start.';
       clearInterval(game.status.soundPlayer);
       buttons.count.innerHTML = '!!';
       game.status.round = 0;
@@ -145,6 +148,7 @@ var game = {
       game.status.soundPlayer = '';
       setTimeout(function(){
         game.logic.startRound();
+        button.alerts.innerHTML = '';
     }, 2000);
     }
   }
@@ -214,7 +218,19 @@ var handlers = {
       buttons.status.count.innerHTML = game.status.round;
     }
   },
-
+  disableBoard : function(){
+    console.log('board disabled');
+    buttons.green.classList.add('disabled');
+    buttons.red.classList.add('disabled');
+    buttons.yellow.classList.add('disabled');
+    buttons.blue.classList.add('disabled');
+  },
+  enableBoard : function(){
+    buttons.green.classList.remove('disabled');
+    buttons.red.classList.remove('disabled');
+    buttons.yellow.classList.remove('disabled');
+    buttons.blue.classList.remove('disabled');
+  }
 
 };
 

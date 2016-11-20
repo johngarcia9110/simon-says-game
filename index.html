@@ -8,11 +8,12 @@
 </head>
 <body>
   <div id="container" class="container">
+    <div id="alerts"></div>
     <div class="buttons">
-      <div id="green" class="block"></div>
-      <div id="red" class="block"></div>
-      <div id="yellow" class="block"></div>
-      <div id="blue" class="block"></div>
+      <div id="green" class="block disabled"></div>
+      <div id="red" class="block disabled"></div>
+      <div id="yellow" class="block disabled"></div>
+      <div id="blue" class="block disabled"></div>
     </div>
     <div class="controls">
       <div class="buttonGroup">
@@ -26,6 +27,7 @@
       <div id="count" class="count">--</div>
     </div>
   </div>
+  <script src='./js/main.js' type='text/javascript'></script>
   <audio id="greenSound" preload="auto" src="http://tylermoeller.github.io/simonsays/audio/simonSound1.mp3" type="audio/mpeg"></audio>
   <audio id="redSound" preload="auto" src="http://tylermoeller.github.io/simonsays/audio/simonSound2.mp3" type="audio/mpeg"></audio>
   <audio id="yellowSound" preload="auto" src="http://tylermoeller.github.io/simonsays/audio/simonSound3.mp3" type="audio/mpeg"></audio>
