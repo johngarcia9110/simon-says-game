@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
-  <div class="container" id="container">
+  <div id="container" class="container">
     <div class="buttons">
       <div id="green" class="block"></div>
       <div id="red" class="block"></div>
@@ -15,19 +15,20 @@
       <div id="blue" class="block"></div>
     </div>
     <div class="controls">
-      <button id="start">START</button>
-      <button id="strict">STRICT</button>
-      <label id="power" class="switch">
-        <input id="switch" type="checkbox" value="1"/>
-        <div class="slider"></div>
-      </label>
-      <div id="count">--</div>
+      <div class="buttonGroup">
+        <button id="start">START</button>
+        <button id="strict">STRICT</button>
+        <label id="power" class="onOff">
+          <input id="switch" type="checkbox" value="1"/>
+          <div class="slider"></div>
+        </label>
+      </div>
+      <div id="count" class="count">--</div>
     </div>
   </div>
   <audio id="greenSound" preload="auto" src="http://tylermoeller.github.io/simonsays/audio/simonSound1.mp3" type="audio/mpeg"></audio>
   <audio id="redSound" preload="auto" src="http://tylermoeller.github.io/simonsays/audio/simonSound2.mp3" type="audio/mpeg"></audio>
   <audio id="yellowSound" preload="auto" src="http://tylermoeller.github.io/simonsays/audio/simonSound3.mp3" type="audio/mpeg"></audio>
   <audio id="blueSound" preload="auto" src="http://tylermoeller.github.io/simonsays/audio/simonSound4.mp3" type="audio/mpeg"></audio>
-  <script type='text/javascript' src='./js/main.js'></script>
 </body>
 </html>

@@ -1,6 +1,3 @@
-//TODO: once finished remove comment from start button disable in logic.startRound
-
-
 var buttons = {
   green : document.getElementById('green'),
   red : document.getElementById('red'),
